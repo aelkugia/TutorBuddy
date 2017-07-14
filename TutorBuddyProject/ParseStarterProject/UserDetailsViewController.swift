@@ -9,9 +9,48 @@
 import UIKit
 import Parse
 
-class UserDetailsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class UserDetailsViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var userImage: UIImageView!
+    
+    @IBOutlet weak var currentCourses: UITableView!
+    
+    var currentCoursesArray = [String]()
+    
+    @IBOutlet weak var technicalSkill: UITableView!
+    
+    var technicalSkillArray = [String]()
+    
+    
+    @IBOutlet weak var currentCourseTextView: UITextField!
+    
+    @IBOutlet weak var technicalSkillTextView: UITextField!
+    
+    @IBAction func addCourse(_ sender: Any) {
+        
+        currentCoursesArray.append(currentCourseTextView.text!)
+        
+        currentCourseTextView.text = ""
+        
+        view.endEditing(true)
+        
+        currentCourses.reloadData()
+        
+    }
+    
+    @IBAction func addSkill(_ sender: Any) {
+        
+        technicalSkillArray.append(technicalSkillTextView.text!)
+        
+        technicalSkillTextView.text = ""
+        
+        view.endEditing(true)
+        
+        technicalSkill.reloadData()
+        
+        
+    }
+    
     
     @IBAction func updateProfileImage(_ sender: Any) {
         
@@ -40,6 +79,66 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
     
     @IBOutlet var availableSwitch: UISwitch!
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if tableView == currentCourses {
+            
+            return currentCoursesArray.count
+            
+        } else {
+            
+            return technicalSkillArray.count
+            
+        }
+        
+       
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if tableView == currentCourses{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "currentCoursesCell")!
+            
+            let currentCourse = currentCoursesArray[indexPath.row]
+            
+            cell.textLabel?.text = currentCourse
+            
+            return cell
+            
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "technicalSkillCell")!
+            
+            let technicalSkill = technicalSkillArray[indexPath.row]
+            
+            cell.textLabel?.text = technicalSkill
+            
+            return cell
+        }
+    
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            if tableView == currentCourses{
+                
+                currentCoursesArray.remove(at: indexPath.row)
+
+            } else {
+                
+                technicalSkillArray.remove(at: indexPath.row)
+
+            }
+            
+            tableView.reloadData()
+            
+        }
+        
+    }
+    
     @IBAction func updateBtn(_ sender: Any) {
         
         PFUser.current()?["isInPerson"] = availableSwitch.isOn
@@ -47,6 +146,10 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
         let imageData = UIImagePNGRepresentation(userImage.image!)
         
         PFUser.current()?["photo"] = PFFile(name: "profile.png", data: imageData!)
+        
+        PFUser.current()?["courses"] = currentCoursesArray
+        
+        PFUser.current()?["skills"] = technicalSkillArray
         
         PFUser.current()?.saveInBackground(block: { (success, error) in
 
@@ -81,7 +184,18 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
         
         // This will ensure viewload saves the users latest profile updates
         
-        // Update here for classes & technical skills
+        
+        if let currentCourses = PFUser.current()?["courses"] as? [String] {
+            
+            currentCoursesArray = currentCourses
+            
+        }
+        
+        if let technicalSkills = PFUser.current()?["skills"] as? [String] {
+            
+            technicalSkillArray = technicalSkills
+            
+        }
         
         if let isInPerson = PFUser.current()?["isInPerson"] as? Bool{
             
@@ -108,6 +222,8 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
             })
             
         }
+        
+        
         
         
     }
