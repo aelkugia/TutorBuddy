@@ -223,9 +223,60 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
             
         }
         
+        let urlArray = ["http://venatrixuk.com/wp-content/themes/ventranix/img/avatars/graduate.png","https://s-media-cache-ak0.pinimg.com/originals/25/7e/8e/257e8e8e17c694cb19ee1a1bd9ccebdc.jpg","https://www.apply4u.co.uk/Cnt/img/SectorImgs/GraduateTraineeJobs.png","https://cdn4.iconfinder.com/data/icons/IMPRESSIONS/education_icons/png/400/graduated.png","http://www.clipartqueen.com/image-files/xgraduation-clipart-girl-with-graduation-hat-color.jpg.pagespeed.ic._9iecTsMPF.jpg"]
         
+        var counter = 0
         
-        
+        for urlString in urlArray {
+            
+            counter += 1
+            
+            let url = URL(string: urlString)!
+            
+            do {
+                
+            let data = try Data(contentsOf: url)
+                
+                let imageFile = PFFile(name: "photo.png", data: data)
+                
+                let user = PFUser()
+                
+                user["photo"] = imageFile
+                
+                user.username = String(counter)
+                
+                user.password = "password"
+                
+                user["isInPerson"] = false
+                
+                user["skills"] = ["Python","Java","Swift"]
+                
+                user["courses"] = ["CS6460 - Educational Technology"]
+                
+                let acl = PFACL()
+                
+                acl.getPublicWriteAccess = true
+                
+                user.acl = acl
+
+                user.signUpInBackground(block: { (success, error) in
+                    
+                    if success {
+                        
+                        print("user signed up!")
+                        
+                    }
+                })
+                
+                
+            } catch {
+                
+                print("Could not get data")
+                
+            }
+            
+        }
+    
     }
 
     override func didReceiveMemoryWarning() {

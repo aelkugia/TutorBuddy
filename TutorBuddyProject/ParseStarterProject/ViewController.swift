@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         
         acl.getPublicWriteAccess = true
             
-            user.acl = acl
+        user.acl = acl
         
         user.signUpInBackground { (success, error) in
             
