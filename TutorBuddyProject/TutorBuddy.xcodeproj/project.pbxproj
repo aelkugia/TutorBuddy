@@ -19,6 +19,7 @@
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		E64AEC621F1713ED007A200B /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AEC611F1713ED007A200B /* UserDetailsViewController.swift */; };
 		E64AEC641F171747007A200B /* student.png in Resources */ = {isa = PBXBuildFile; fileRef = E64AEC631F171747007A200B /* student.png */; };
+		E64AEC661F1B1588007A200B /* SwipingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AEC651F1B1588007A200B /* SwipingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		E64AEC611F1713ED007A200B /* UserDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		E64AEC631F171747007A200B /* student.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student.png; sourceTree = "<group>"; };
+		E64AEC651F1B1588007A200B /* SwipingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
+				E64AEC651F1B1588007A200B /* SwipingViewController.swift */,
 				E64AEC631F171747007A200B /* student.png */,
 				E64AEC611F1713ED007A200B /* UserDetailsViewController.swift */,
 			);
@@ -193,6 +196,7 @@
 			files = (
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
+				E64AEC661F1B1588007A200B /* SwipingViewController.swift in Sources */,
 				E64AEC621F1713ED007A200B /* UserDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

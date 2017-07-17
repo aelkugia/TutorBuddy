@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         let acl = PFACL()
         
         acl.getPublicWriteAccess = true
+        acl.getPublicReadAccess = true
             
         user.acl = acl
         
@@ -83,7 +84,7 @@ class ViewController: UIViewController {
                     
                     print("Logged In")
                     
-                    self.performSegue(withIdentifier: "goToUserInfo", sender: self)
+                    self.redirectUser()
                     
                 }
             })
@@ -117,9 +118,24 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        redirectUser()
+        
+    }
+    
+    func redirectUser() {
+        
         if PFUser.current() != nil {
             
-            performSegue(withIdentifier: "goToUserInfo", sender: self)
+            if PFUser.current()?["courses"] != nil && PFUser.current()?["skills"] != nil && PFUser.current()?["isInPerson"] != nil && PFUser.current()?["photo"] != nil {
+                
+                performSegue(withIdentifier: "swipeFromInitialSegue", sender: self)
+                
+                
+            } else {
+                
+                performSegue(withIdentifier: "goToUserInfo", sender: self)
+                
+            }
             
         }
         

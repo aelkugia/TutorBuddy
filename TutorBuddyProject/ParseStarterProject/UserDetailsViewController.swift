@@ -171,6 +171,8 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
                 
                 print("Profile Updated")
                 
+                self.performSegue(withIdentifier: "showSwipingViewController", sender: self)
+                
             }
 
         })
