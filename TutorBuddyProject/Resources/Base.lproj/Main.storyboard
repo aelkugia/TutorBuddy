@@ -295,15 +295,16 @@
                                 <color key="textColor" red="0.87678582260000004" green="0.99898972669999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="student.png" translatesAutoresizingMaskIntoConstraints="NO" id="URa-eJ-r0k">
-                                <rect key="frame" x="67" y="222" width="240" height="222"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdi-Au-hhm" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="16" y="127" width="343" height="433"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.3529411764705882" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="URa-eJ-r0k" id="bYs-TU-D74"/>
+                        <outlet property="swipeCard" destination="cdi-Au-hhm" id="GE6-zQ-niw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cgy-lW-kup" userLabel="First Responder" sceneMemberID="firstResponder"/>
