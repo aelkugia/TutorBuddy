@@ -208,9 +208,13 @@ class SwipingViewController: UIViewController {
                         
                         let imageFile = user["photo"] as! PFFile
                         
+                        //let courses = user["courses"] as! NSMutableArray
+                        
                         self.images.append(imageFile)
                         
                         self.users.append(username)
+                        
+                        //self.users.append(courses)
                         
                         self.swipeCard.reloadData()
                         

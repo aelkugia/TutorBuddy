@@ -14,5 +14,10 @@ class swipeCard: UIView {
     
     @IBOutlet weak var label: UILabel!
     
+    @IBOutlet weak var courses: UITextView!
+    
+    @IBOutlet weak var skills: UITextView!
+    
+    @IBOutlet weak var availability: UILabel!
 
 }
