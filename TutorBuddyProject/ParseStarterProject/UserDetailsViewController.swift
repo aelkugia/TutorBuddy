@@ -151,6 +151,10 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
         
         PFUser.current()?["skills"] = technicalSkillArray
         
+        PFUser.current()?["rejected"] = [PFUser]()
+        
+        PFUser.current()?["accepted"] = [PFUser]()
+
         PFUser.current()?.saveInBackground(block: { (success, error) in
 
             if error != nil {

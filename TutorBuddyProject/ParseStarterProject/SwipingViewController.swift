@@ -171,6 +171,8 @@ class SwipingViewController: UIViewController {
     
     var availability = [Bool]()
     
+    var pfUser = [PFUser]()
+    
     // Research model objects
     //1) add textviews to nib view and file
     //2) set up area for skills, courses, availability
@@ -208,13 +210,23 @@ class SwipingViewController: UIViewController {
                         
                         let imageFile = user["photo"] as! PFFile
                         
-                        //let courses = user["courses"] as! NSMutableArray
+                        let courses = user["courses"] as! [String]
+                        
+                        let skills = user["skills"] as! [String]
+                        
+                        let availability = user["isInPerson"] as! Bool
                         
                         self.images.append(imageFile)
                         
                         self.users.append(username)
                         
-                        //self.users.append(courses)
+                        self.courses.append(courses)
+                        
+                        self.skills.append(skills)
+                        
+                        self.availability.append(availability)
+                        
+                        self.pfUser.append(user)
                         
                         self.swipeCard.reloadData()
                         
@@ -275,6 +287,16 @@ extension SwipingViewController: KolodaViewDataSource, KolodaViewDelegate{
         
         let imageFile = images[index]
         
+        let userCourses = courses[index]
+        
+        let stringRepresentation = userCourses.joined(separator: "\n")
+    
+        let userSkills = skills[index]
+        
+        let stringRepresentation2 = userSkills.joined(separator: "\n")
+        
+        let available = availability[index]
+        
         imageFile.getDataInBackground(block: { (data, error) in
             
             if error != nil {
@@ -288,7 +310,22 @@ extension SwipingViewController: KolodaViewDataSource, KolodaViewDelegate{
                 swipeCard?.imageView.image = UIImage(data: imageData)
                 
                 swipeCard?.label.text = self.users[index]
+            
+                swipeCard?.courses.text = stringRepresentation
                 
+                swipeCard?.skills.text = stringRepresentation2
+                
+                if available {
+                    
+                    swipeCard?.availability.text = "In Person"
+                    
+                } else {
+                    
+                    swipeCard?.availability.text = "Online"
+
+                    
+                }
+
                 
             }
             
@@ -310,16 +347,71 @@ extension SwipingViewController: KolodaViewDataSource, KolodaViewDelegate{
         
         var swipeCard = Bundle.main.loadNibNamed("swipeCard", owner: self, options: nil)?[0] as? swipeCard
 
-        
         swipeCard?.label.text = "No more users"
+        
+        swipeCard?.coursesLabel.text = ""
+        
+        swipeCard?.skillsLabel.text = ""
+        
+        swipeCard?.availabilityLabel.text = ""
         
         self.swipeCard.addSubview(swipeCard!)
     
         
     }
     
+    func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
+        
+        let user = pfUser[index]
+        
+        if direction == .left {
+            
+            if var rejectedUsers = PFUser.current()?["rejected"] as? [PFUser] {
+            
+                rejectedUsers.append(user)
+                
+                PFUser.current()?["rejected"] = rejectedUsers
+                
+            }
+            
+            
+        } else if direction == .right {
+            
+            if var acceptedUsers = PFUser.current()?["accepted"] as? [PFUser]{
+                
+                acceptedUsers.append(user)
+                
+                PFUser.current()?["accepted"] = acceptedUsers
+            }
+            
+        }
+        
+        PFUser.current()?.saveInBackground(block: { (success, error) in
+            
+            if error != nil {
+                
+                var errorMessage = "Update failed, please try again"
+                
+                let error = error as NSError?
+                
+                if let parseError = error?.userInfo["error"] as? String {
+                    
+                    errorMessage = parseError
+                    
+                }
+                
+            } else {
+                
+                print("Swipe Updated")
+                
+            }
+        
+        
+    })
     
+        return true
 
+    }
     
 
 }
