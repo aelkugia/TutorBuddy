@@ -151,9 +151,9 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
         
         PFUser.current()?["skills"] = technicalSkillArray
         
-        PFUser.current()?["rejected"] = [PFUser]()
+        PFUser.current()?["rejectedUsers"] = [String]()
         
-        PFUser.current()?["accepted"] = [PFUser]()
+        PFUser.current()?["acceptedUsers"] = [String]()
 
         PFUser.current()?.saveInBackground(block: { (success, error) in
 
@@ -189,6 +189,16 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
         // Do any additional setup after loading the view.
         
         // This will ensure viewload saves the users latest profile updates
+        
+        PFGeoPoint.geoPointForCurrentLocation { (geopoint, error) in
+            
+            if let geopoint = geopoint {
+                
+                PFUser.current()?["location"] = geopoint
+                
+                PFUser.current()?.saveInBackground()
+            }
+        }
         
         
         if let currentCourses = PFUser.current()?["courses"] as? [String] {

@@ -26,10 +26,9 @@ class MatchesViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let query = PFUser.query()
         
-        query?.whereKey("accepted", contains: PFUser.current()?.objectId)
+        query?.whereKey("acceptedUsers", contains: PFUser.current()!.objectId!)
         
-        query?.whereKey("objectId", containedIn: PFUser.current()?["accepted"] as! [PFUser])
-        
+        query?.whereKey("objectId", containedIn: PFUser.current()!["acceptedUsers"] as! [String])
         
         // the above line was original casted as [String] but recieved error "could not case value of type PFObject to NSstring
         
@@ -44,6 +43,8 @@ class MatchesViewController: UIViewController, UITableViewDelegate, UITableViewD
         query?.findObjectsInBackground(block: { (objects, error) in
             
             if let users = objects {
+                
+                print (users)
                 
                 for object in users {
                     

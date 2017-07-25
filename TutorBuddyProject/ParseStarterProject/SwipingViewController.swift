@@ -173,6 +173,8 @@ class SwipingViewController: UIViewController {
     
     var pfUser = [PFUser]()
     
+    var userObjectId = [String]()
+    
     // Research model objects
     //1) add textviews to nib view and file
     //2) set up area for skills, courses, availability
@@ -215,6 +217,10 @@ class SwipingViewController: UIViewController {
                     
                     if let user = object as? PFUser{
                         
+                        let id = user.objectId!
+                        
+                        guard id != PFUser.current()?.objectId! else { return }
+                        
                         let username = user["username"] as! String
                         
                         let imageFile = user["photo"] as! PFFile
@@ -224,6 +230,8 @@ class SwipingViewController: UIViewController {
                         let skills = user["skills"] as! [String]
                         
                         let availability = user["isInPerson"] as! Bool
+                        
+                        let userObjectId = user.objectId! as String
                         
                         self.images.append(imageFile)
                         
@@ -236,6 +244,8 @@ class SwipingViewController: UIViewController {
                         self.availability.append(availability)
                         
                         self.pfUser.append(user)
+                        
+                        self.userObjectId.append(userObjectId)
                         
                         self.swipeCard.reloadData()
                         
@@ -388,22 +398,22 @@ extension SwipingViewController: KolodaViewDataSource, KolodaViewDelegate{
         
         if direction == .left {
             
-            if var rejectedUsers = PFUser.current()?["rejected"] as? [PFUser] {
-            
-                rejectedUsers.append(user)
+            if var rejectedUsers = PFUser.current()?["rejectedUsers"] as? [String]{
                 
-                PFUser.current()?["rejected"] = rejectedUsers
+                rejectedUsers.append(user.objectId!)
+                
+                PFUser.current()?["rejectedUsers"] = rejectedUsers
                 
             }
             
             
         } else if direction == .right {
             
-            if var acceptedUsers = PFUser.current()?["accepted"] as? [PFUser]{
+            if var acceptedUsers = PFUser.current()?["acceptedUsers"] as? [String]{
                 
-                acceptedUsers.append(user)
+                acceptedUsers.append(user.objectId!)
                 
-                PFUser.current()?["accepted"] = acceptedUsers
+                PFUser.current()?["acceptedUsers"] = acceptedUsers
             }
             
         }
