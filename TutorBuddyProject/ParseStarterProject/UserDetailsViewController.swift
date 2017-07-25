@@ -259,6 +259,10 @@ class UserDetailsViewController: UIViewController, UINavigationControllerDelegat
                 
                 user["courses"] = ["CS6460 - Educational Technology"]
                 
+                user["accepted"] = [PFUser]()
+
+                user["rejected"] = [PFUser]()
+                
                 let acl = PFACL()
                 
                 acl.getPublicWriteAccess = true

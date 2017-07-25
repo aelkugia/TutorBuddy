@@ -23,6 +23,8 @@
 		E64AEC661F1B1588007A200B /* SwipingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AEC651F1B1588007A200B /* SwipingViewController.swift */; };
 		E64AEC681F1F0793007A200B /* swipeCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = E64AEC671F1F0793007A200B /* swipeCard.xib */; };
 		E64AEC6A1F1F07CD007A200B /* swipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AEC691F1F07CD007A200B /* swipeCard.swift */; };
+		E64AEC6C1F26B52C007A200B /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AEC6B1F26B52C007A200B /* MatchesViewController.swift */; };
+		E64AEC6E1F26B85C007A200B /* MatchesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64AEC6D1F26B85C007A200B /* MatchesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		E64AEC651F1B1588007A200B /* SwipingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipingViewController.swift; sourceTree = "<group>"; };
 		E64AEC671F1F0793007A200B /* swipeCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = swipeCard.xib; sourceTree = "<group>"; };
 		E64AEC691F1F07CD007A200B /* swipeCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = swipeCard.swift; sourceTree = "<group>"; };
+		E64AEC6B1F26B52C007A200B /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
+		E64AEC6D1F26B85C007A200B /* MatchesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,8 @@
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
+				E64AEC6D1F26B85C007A200B /* MatchesTableViewCell.swift */,
+				E64AEC6B1F26B52C007A200B /* MatchesViewController.swift */,
 				E64AEC651F1B1588007A200B /* SwipingViewController.swift */,
 				E64AEC631F171747007A200B /* student.png */,
 				E64AEC611F1713ED007A200B /* UserDetailsViewController.swift */,
@@ -268,10 +274,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E64AEC6C1F26B52C007A200B /* MatchesViewController.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				E64AEC6A1F1F07CD007A200B /* swipeCard.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				E64AEC661F1B1588007A200B /* SwipingViewController.swift in Sources */,
+				E64AEC6E1F26B85C007A200B /* MatchesTableViewCell.swift in Sources */,
 				E64AEC621F1713ED007A200B /* UserDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

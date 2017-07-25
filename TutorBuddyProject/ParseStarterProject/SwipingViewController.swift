@@ -198,6 +198,15 @@ class SwipingViewController: UIViewController {
         
         query?.whereKeyExists("objectId")
         
+        if let latitude = (PFUser.current()!["location"] as AnyObject).latitude {
+            
+            if let longitude = (PFUser.current()!["location"] as AnyObject).longitude {
+                
+                query?.whereKey("location", withinGeoBoxFromSouthwest: PFGeoPoint(latitude: latitude - 1, longitude: longitude - 1), toNortheast: PFGeoPoint(latitude: latitude + 1, longitude: longitude + 1))
+                
+            }
+        }
+        
         query?.findObjectsInBackground(block: { (objects, error) in
             
             if error == nil {
@@ -237,7 +246,20 @@ class SwipingViewController: UIViewController {
             
         })
         
-        
+        PFGeoPoint.geoPointForCurrentLocation { (geopoint, error) in
+            
+            if let geopoint = geopoint {
+                
+                PFUser.current()?["location"] = geopoint
+                
+                PFUser.current()?.saveInBackground()
+                
+                
+                
+            }
+            
+            
+        }
         
     }
 
@@ -347,7 +369,7 @@ extension SwipingViewController: KolodaViewDataSource, KolodaViewDelegate{
         
         var swipeCard = Bundle.main.loadNibNamed("swipeCard", owner: self, options: nil)?[0] as? swipeCard
 
-        swipeCard?.label.text = "No more users"
+        swipeCard?.label.text = "No more users, please try again later"
         
         swipeCard?.coursesLabel.text = ""
         

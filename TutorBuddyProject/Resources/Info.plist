@@ -43,6 +43,8 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To show other users your profile image</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To find other people matched with</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
