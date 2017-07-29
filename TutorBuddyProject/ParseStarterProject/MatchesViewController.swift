@@ -30,16 +30,6 @@ class MatchesViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         query?.whereKey("objectId", containedIn: PFUser.current()!["acceptedUsers"] as! [String])
         
-        // the above line was original casted as [String] but recieved error "could not case value of type PFObject to NSstring
-        
-        // 1) doesn't show MatchesViewController
-        // 2) possible bug listed below
-        // accepted/rejected arrays list what is shown below, not just the objectId
-        // {"__type":"Pointer","className":"_User","objectId":"F2W2pPdJ7S"}
-        // PFUser.current()?["accepted"] as? [PFUser]
-        
-        // 29:00
-        
         query?.findObjectsInBackground(block: { (objects, error) in
             
             if let users = objects {
